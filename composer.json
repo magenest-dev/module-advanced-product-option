@@ -1,0 +1,25 @@
+{
+    "name": "magenest/module-advanced-product-option",
+    "description": "Create unlimited custom option templates and assign them to any products",
+    "require": {
+    "magenest/core" : "*"
+    },
+    "type": "magento2-module",
+    "version": "1.5.0",
+    "license": [
+    "BSD-3-Clause"
+    ],
+    "authors": [
+       {
+         "name": "Magenest JSC"
+       }
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Magenest\\AdvancedProductOption\\": ""
+        }
+    }
+}

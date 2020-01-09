@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Magenest_AdvancedProductOption::js/tooltipster/css/tooltipster.bundle.min.css"/>
+        <css src="Magenest_AdvancedProductOption::css/apo.css"/>
+
+    </head>
+    <body>
+        <attribute name="class" value="page-product-advanced-option"/>
+        <referenceBlock name="product.info.options.wrapper">
+            <block class="Magenest\AdvancedProductOption\Block\Product\View\Option" name="product.info.options.advanced" as="options_advanced" before="-" template="product/view/type/options/advanced.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="advancedoption" xsi:type="array">
+                                <item name="component" xsi:type="string">Magenest_AdvancedProductOption/js/view/advancedProductOption</item>
+                                <item name="config" xsi:type="array">
+                                    <!--<item name="productId" xsi:type="string">4</item>-->
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <referenceContainer name="js">
+            <link src="Magenest_AdvancedProductOption::js/tooltipster/js/tooltipster.bundle.min.js"/>
+
+        </referenceContainer>
+    </body>
+</page>

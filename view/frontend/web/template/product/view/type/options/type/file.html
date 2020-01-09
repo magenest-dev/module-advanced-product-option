@@ -1,0 +1,9 @@
+<label>
+    <span data-bind="text:title"> </span>
+    <!--ko if:is_required() -->
+    <span class="required">(*)</span>
+    <!--/ko-->
+</label>
+<div class="control" >
+    <input type="file" data-bind="attr: { name: 'aop[' + id() + ']',class:className()}" />
+</div>

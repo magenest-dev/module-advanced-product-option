@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magenest. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+        <add id="Magenest_AdvancedProductOption::advancedproductoption"
+             title="Advanced Product Option"
+             module="Magenest_AdvancedProductOption"
+             sortOrder="60"
+             resource="Magenest_AdvancedProductOption::advancedproductoption"/>
+        <add id="Magenest_AdvancedProductOption::advancedproductoption_template"
+             title="Templates Management"
+             module="Magenest_AdvancedProductOption"
+             sortOrder="10"
+             parent="Magenest_AdvancedProductOption::advancedproductoption"
+             action="advancedproductoption/template/index"
+             resource="Magenest_AdvancedProductOption::advancedproductoption_template"/>
+        <add id="Magenest_AdvancedProductOption::advancedproductoption_conf"
+             title="Settings"
+             module="Magenest_AdvancedProductOption"
+             sortOrder="20"
+             parent="Magenest_AdvancedProductOption::advancedproductoption"
+             action="adminhtml/system_config/edit/section/advancedproductoption/"
+             resource="Magenest_AdvancedProductOption::advancedproductoption_conf"/>
+    </menu>
+</config>

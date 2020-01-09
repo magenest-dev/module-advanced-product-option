@@ -1,0 +1,71 @@
+<label class="label">
+    <span data-bind="text:title()"> </span>
+    <!--ko if:is_required() -->
+    <span class="required">(*)</span>
+    <!--/ko-->
+</label>
+
+<div class="control">
+    <!--ko if:showSpecialPrice()-->
+    <span class="price-notice" data-bind="text:symbol_calculate()"></span>
+    <span class="special-price" data-bind="text:activeSpecialPrice"></span>
+    <!--/ko-->
+    <!--ko if:showSPrice() -->
+    <span class="price-notice" data-bind="attr:{'class': originPriceClass() }, text:symbol_calculate()"></span>
+    <span class="normal-price" data-bind="text:activePrice,attr:{'class': originPriceClass()}"> </span>
+    <!--/ko-->
+    <select multiple="multiple" data-bind="options:rows(),
+                            optionsText:  function(item) {
+                                return item.title() + ' ' + item.showCalculateType() + ' ' + item.priceDisplay()
+                            },
+                            optionsValue : function (item) {
+                                return item.id()
+                            },
+                            optionsCaption: 'Choose...',
+                            chooseOptionFromRow:selectedRows(),
+                            event:{ change:chooseOption.bind(this,option,rows())},
+                            attr: { name: 'aop[' + id() + '][]','data-option':  $data.id(),class:className(),'data-rule-required': dataRequired()}
+    ">
+
+    </select>
+    <!-- ko if:hasActiveToolTip() -->
+    <span class="tooltip-icon tooltip" >
+        <span class="tooltiptext" data-bind="text:active_tooltip()"> </span>
+    </span>
+    <!--/ko-->
+    <!-- ko if:activeImage() -->
+    <div class="option-illustration tooltip">
+        <img class="apo-img" data-bind="attr: {src: activeImage(),style: image_size()}"/>
+    </div>
+    <!--/ko-->
+    <!--show the product swatch-->
+    <div class="product-color-swatches">
+        <div class="swatch-first-row">
+            <!-- ko foreach:rows-->
+            <!--ko if:productImg()-->
+            <span class="color_swatch_box">
+                <img data-bind="attr:{src:productImg,tittle:title,style:product_image_size()},event:{ click:chooseSwatch}"  >
+            </span>
+            <!--/ko-->
+            <!--ko if:isSelected() -->
+            <span data-bind="event:{ click:removeSwatch}" class="remove-icon">
+                X
+            </span>
+            <!--/ko-->
+            <!--/ko-->
+        </div>
+        <!--todo:add the js-->
+        <div class="swatch-second-row">
+            <!-- ko foreach:rows-->
+            <!--ko if:isSelected() -->
+            <!--ko if:swatch()-->
+            <span class="swatch-illusion">
+                <img data-bind="attr:{src:swatch,tittle:title,style:swatch_size()}" />
+            </span>
+            <!--/ko-->
+            <!--/ko-->
+            <!--/ko-->
+        </div>
+        <!--display the illustration image-->
+    </div>
+</div>

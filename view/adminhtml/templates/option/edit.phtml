@@ -1,0 +1,583 @@
+<?php
+/**
+ * Created by Magenest
+ * User: Luu Thanh Thuy
+ * Date: 14/05/2016
+ * Time: 00:25
+ */
+/** @var \Magenest\AdvancedProductOption\Block\Adminhtml\Template\Edit $block */
+$templateId = $block->getTemplateId();
+$templateTitle = $block->getTemplateTitle();
+
+$assignProducts = $block->getAssignedProducts();
+
+$excludeMode = $block->getExcludeMode();
+//$a = $block->getWebsite();
+?>
+
+<div class="error"><span></span></div>
+
+<div id="apo" data-bind="scope:'megamenu'">
+    <div id="advancedoptions">
+        <div class="page-actions" style="margin-bottom: 50px">
+            <div class="page-actions-inner">
+                <div class="page-actions-buttons">
+                    <button title="<?php echo __('Save and Continue Edit'); ?>"
+                            data-bind="event: { click: $data.submitOptionTemplateAndEdit}">
+                        <?php echo __('Save and Continue Edit') ?>
+                    </button>
+                    <button class="action-primary" title="<?php echo __('Save'); ?>"
+                            data-bind="event: { click: $data.submitOptionTemplate}">
+                        <?php echo __('Save') ?>
+                    </button>
+                    <button type="button" id="back_tempate" class="back" title="<?php echo __('Back'); ?>"
+                            onclick="location.href= '<?= $block->getUrl('advancedproductoption/template') ?>'">
+                        <?php echo __('Back'); ?>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" id="form_key" name="form_key" value="<?php echo $block->getFormKey(); ?>"/>
+
+        <input type="hidden" name="saveandcontinueedit" id="saveandcontinueedit">
+        <div class="field" style="clear: both;">
+            <label> <?php echo __('Template Name'); ?> <span class="required">*</span></label>
+            <input name="id" type="hidden" value="<?php echo $templateId; ?>">
+            <input required name="title" value="<?php echo $templateTitle; ?>">
+        </div>
+        <div class="left-container mg-lef">
+            <div class="field">
+                <label> <?php echo __('Option type') ?> <span class="required">*</span></label>
+                <select data-bind="options:availableType,value:selectedType">
+                </select>
+            </div>
+            <button data-bind="click:addOption,i18n: 'Add Option'"><?php echo __('Add Option'); ?> </button>
+        </div>
+
+        <div class="option-template-main-container mg-right">
+            <ul class="box-option" data-bind="foreach:  { data: templateoptions, as: 'option' }">
+                <li class="content-option">
+                    <div class="fieldset-wrapper"
+                         data-bind="collapsible: {header: '.header',  active: true, content: '.content',openClass: '_show', closeOnOuter: false}">
+                        <div class="box-title header fieldset-wrapper-title" data-role="title">
+                            <div class="field-wrapper-title" data-bind="toggleCollapsible">
+                                <div class="field">
+                                    <strong class="option-type" data-bind="text:option.type"> </strong>
+                                    <input type="hidden"
+                                           data-bind="attr: { name: 'option[' + option.id() + '][id]'},value:option.id">
+                                    <input type="hidden"
+                                           data-bind="attr: { name: 'option[' + option.id() + '][type]'},value:option.type">
+                                    <input type="hidden"
+                                           data-bind="attr: { name: 'option[' + option.id() + '][is_new]'},value:option.is_new">
+                                </div>
+                                <div class="actions">
+                                    <button
+                                        data-bind="event:{click:$root.deleteOption}"> <?php echo __('Delete Option'); ?></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acc-content content admin__collapsible-content" data-role="content"
+                             data-bind="css: {_show: $collapsible.opened()}">
+                            <div class="fieldset">
+                                <div class="field ">
+                                    <label class="label"> <?php echo __('Title'); ?><span
+                                            class="required">*</span></label>
+                                    <input required
+                                           data-bind="attr: { name: 'option[' +option. id() + '][title]'},value:option.title">
+                                </div>
+                                <div class="field ">
+                                    <label class="label"> <?php echo __('Tooltip'); ?></label>
+                                    <input
+                                        data-bind="attr: { name: 'option[' +option. id() + '][tooltip]'},value:option.tooltip">
+                                </div>
+                                <div class="field ">
+                                    <input style="margin-left: 450px;" type="checkbox" class="checkbox_require"
+                                           data-bind="attr: { name: 'option[' +option. id() + '][is_required]'},checked:option.is_required"
+                                           value="1">
+                                    <label for="checkbox_require"></label>
+                                    <span> <?php echo __('Is required'); ?></span>
+                                </div>
+                            </div>
+
+                            <div class="box-content">
+                                <ul class="box-row option-row" data-bind="foreach: { data: option.rows, as: 'row' }">
+                                    <li class="content-row">
+                                        <div class="fieldset-wrapper admin__collapsible-block-wrapper"
+                                             data-bind="collapsible: {openClass: '_show', closeOnOuter: false}">
+                                            <div class="fieldset-wrapper-title" data-bind="toggleCollapsible">
+                                                <div class="box-title">
+                                                    <div class="field-wrapper-title">
+                                                        <div class="field">
+                                                            <strong><?php echo __('content row'); ?></strong>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="admin__collapsible-content" data-role="collapsible-content"
+                                             data-bind="css: {_show: $collapsible.opened()}">
+                                            <div class="actions">
+                                                <button
+                                                    data-bind="event:{click:$root.deleteRow}"> <?php echo __('Delete Row'); ?></button>
+                                            </div>
+                                            <div class="box-tier">
+                                                <div class="content-tier">
+                                                    <table class="colum-tier">
+                                                        <thead>
+                                                        <tr>
+                                                            <td>
+                                                                <label><?php echo __('Title'); ?> <span
+                                                                        class="required">*</span></label>
+                                                            </td>
+                                                            <td>
+                                                                <label><?php echo __('Description'); ?></label>
+                                                            </td>
+                                                            <td>
+                                                                <label><?php echo __('Tooltip'); ?></label>
+                                                            </td>
+                                                            <td>
+                                                                <label><?php echo __('Show Tooltip'); ?></label>
+                                                            </td>
+                                                            <td>
+                                                                <label><?php echo __('Calculate Type'); ?></label>
+                                                            </td>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <input type="hidden"
+                                                                       data-bind="attr: { name: 'row[' + row.id() + '][id]'},value:row.id"
+                                                                       class="row">
+                                                                <input type="hidden"
+                                                                       data-bind="attr: { name: 'row[' + row.id() + '][is_new]'},value:row.is_new">
+                                                                <input required
+                                                                    data-bind="attr: { name: 'row[' + row.id() + '][title]'},value:row.title">
+                                                                <input type="hidden"
+                                                                       data-bind="attr: { name: 'row[' + row.id() + '][option_id]'},value:row.option_id">
+                                                            </td>
+                                                            <td>
+                                                                <input
+                                                                    data-bind="attr: { name: 'row[' + row.id() + '][description]'},value:row.description">
+                                                            </td>
+                                                            <td>
+                                                                <input
+                                                                    data-bind="attr: { name: 'row[' + row.id() + '][tooltip]'},value:row.tooltip">
+                                                            </td>
+                                                            <td>
+                                                                <input type="checkbox"
+                                                                       data-bind="attr: { name: 'row[' + row.id() + '][enableTooltip]'},value:row.enableTooltip,checked:row.enableTooltip"
+                                                                       class="admin__control-checkbox">
+                                                                <label></label>
+                                                            </td>
+                                                            <td>
+                                                                <select data-bind="options:calculate_type_option(),
+                                                                                value: row.calculate_type(),
+                                                                                attr: { name: 'row[' + row.id() + '][calculate_type]'}"
+                                                                >
+                                                                </select>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <!--price table-->
+                                                    <table class="colum-tier">
+                                                        <thead>
+                                                        <tr>
+                                                            <td>
+                                                                <label><?php echo __('Qty'); ?></label>
+                                                            </td>
+                                                            <td>
+                                                                <label><?php echo __('Price'); ?></label>
+                                                            </td>
+                                                            <td>
+                                                                <label> <?php echo __('Price type'); ?></label>
+                                                            </td>
+                                                            <td>
+                                                                <label> <?php echo __('Special price'); ?></label>
+                                                            </td>
+                                                            <td>
+                                                                <label> <?php echo __('From'); ?></label>
+                                                            </td>
+                                                            <td>
+                                                                <label> <?php echo __('To'); ?></label>
+                                                            </td>
+                                                            <td>
+                                                                <label> <?php echo __('Sku'); ?></label>
+                                                            </td>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <input
+                                                                    data-bind="attr: { name: 'row[' + row.id() + '][qty]'},value:row.qty"
+                                                                    class="qty small-input">
+                                                            </td>
+                                                            <td>
+                                                                <div class="admin__control-addon">
+                                                                    <input
+                                                                        data-bind="attr: { name: 'row[' + row.id() + '][price]'},value:row.price"
+                                                                        class="price small-input">
+                                                                    <label class="admin__addon-prefix">
+                                                                        <span
+                                                                            data-bind="text:$root.currencySymbol"> </span>
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <select data-bind="options:price_type_option(),
+                                                                                value: row.price_type(),
+                                                                                attr: { name: 'row[' + row.id() + '][price_type]'}"
+                                                                >
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                                                <div class="admin__control-addon">
+                                                                    <input data-bind="attr:{ name: 'row[' + row.id() + '][special_price]'},
+                                                                                event:{change: $root.specialPriceChange},
+                                                                                value:row.special_price"
+                                                                           class="price small-input"
+                                                                    />
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <input type="date"
+                                                                       data-bind="attr:{name:'row[' + row.id() + '][special_date_from]'}, value: row.special_date_from()"
+                                                                       class="validate-date-range"/>
+                                                            </td>
+                                                            <td>
+                                                                <input type="date"
+                                                                       data-bind="attr:{name:'row[' + row.id() + '][special_date_to]'}, value: row.special_date_to()"
+                                                                       class="validate-date-range"
+                                                                />
+                                                            </td>
+                                                            <td>
+                                                                <input
+                                                                    data-bind="attr: { name: 'row[' + row.id() + '][sku]'}, value:row.sku"
+                                                                    class="small-input"/>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <!--/end price table-->
+                                                    <!--Image table-->
+                                                    <table class="colum-tier">
+                                                        <thead>
+                                                        <tr>
+                                                            <td>
+                                                                <label> <?php echo __('Image'); ?></label>
+                                                            </td>
+                                                            <!-- For swatch -->
+                                                            <td>
+                                                                <label> <?php echo __('Swatch'); ?></label>
+                                                            </td>
+
+                                                            <td>
+                                                                <label> <?php echo __('Product Image'); ?></label>
+                                                            </td>
+
+                                                            <td>
+                                                                <label> <?php echo __('Children'); ?></label>
+                                                            </td>
+                                                            <td></td>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <!--ko if:image -->
+                                                            <td>
+                                                                <img data-bind="attr:{src: image}">
+                                                                <input type="hidden"
+                                                                       data-bind="attr:{ name: 'row[' + row.id() + '][image]', value:row.image }">
+                                                                <div class="action-default"
+                                                                     data-bind="event:{click:$root.removeImage}"><?php echo __('Remove'); ?></div>
+                                                            </td>
+                                                            <!--/ko-->
+                                                            <!--ko ifnot:image -->
+                                                            <td class="input-img-file-wrapper">
+                                                                <input type="file"
+                                                                       data-url="<?php echo $block->getUrl('advancedproductoption/template/upload'); ?>"
+                                                                       name="image"
+                                                                       data-bind="attr: {id:'row_image' + row.id() },fileupload:{}">
+                                                                <div class="spinner-wrapper" style="display: none"><span
+                                                                        class="spinner"> <img
+                                                                            src="<?php echo $block->getViewFileUrl('Magenest_AdvancedProductOption/images/loader-1.gif') ?>"> </span>
+                                                                </div>
+                                                            </td>
+                                                            <!--/ko-->
+                                                            <!--ko if:swatch -->
+                                                            <td>
+                                                                <img data-bind="attr:{src: swatch}">
+                                                                <input type="hidden"
+                                                                       data-bind="attr:{ name: 'row[' + row.id() + '][swatch]', value:row.swatch }">
+                                                                <div class="action-default"
+                                                                     data-bind="event:{click:$root.removeSwatch}"><?php echo __('Remove'); ?></div>
+                                                            </td>
+                                                            <!--/ko-->
+                                                            <!--ko ifnot:swatch -->
+                                                            <td class="input-img-file-wrapper">
+                                                                <input type="file"
+                                                                       data-url="<?php echo $block->getUrl('advancedproductoption/template/upload'); ?>"
+                                                                       name="swatch"
+                                                                       data-bind="attr: {id:'row_swatch' + row.id() },swatchupload:{}">
+                                                                <div class="spinner-wrapper" style="display: none"><span
+                                                                        class="spinner"> <img
+                                                                            src="<?php echo $block->getViewFileUrl('Magenest_AdvancedProductOption/images/loader-1.gif') ?>"> </span>
+                                                                </div>
+                                                            </td>
+                                                            <!--/ko-->
+                                                            <!--ko if:productImg -->
+                                                            <td>
+                                                                <img data-bind="attr:{src: productImg}">
+                                                                <input type="hidden"
+                                                                       data-bind="attr:{ name: 'row[' + row.id() + '][productImg]', value:row.productImg }">
+                                                                <div class="action-default"
+                                                                     data-bind="event:{click:$root.removeProductImg}"><?php echo __('Remove'); ?></div>
+                                                            </td>
+                                                            <!--/ko-->
+                                                            <!--ko ifnot:productImg -->
+                                                            <td>
+                                                                <input type="file"
+                                                                       data-url="<?php echo $block->getUrl('advancedproductoption/template/upload'); ?>"
+                                                                       name="productImg"
+                                                                       data-bind="attr: {id:'row_productImg' + row.id() },productimgupload:{}">
+                                                                <div class="spinner-wrapper" style="display: none"><span
+                                                                        class="spinner"> <img
+                                                                            src="<?php echo $block->getViewFileUrl('Magenest_AdvancedProductOption/images/loader-1.gif') ?>"> </span>
+                                                                </div>
+                                                            </td>
+                                                            <!--/ko-->
+                                                            <td>
+                                                                <div class="row-children">
+                                                                    <div class="panel content">
+                                                                        <select multiple="multiple" data-bind="
+                                                                        attr: { name: 'row[' + row.id() + '][children][]','data-option-id': row.option_id()},
+                                                                        options:$root.templateoptions(),
+                                                                        optionsText:  function(item) {
+                                                                            return item.title() + ''
+                                                                        },
+                                                                        optionsValue : function (item) {
+                                                                            return item.id()
+                                                                        },
+                                                                        selectedOptions :childrenOption,
+                                                                        optionsAfterRender: setOptionDisable
+                                                                      ">
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <!--end of image table-->
+                                                    <div class="table-tier">
+                                                        <h3>Tier Price</h3>
+                                                        <table>
+                                                            <thead>
+                                                            <tr>
+                                                                <td>
+                                                                    <label><?php echo __('Website'); ?></label>
+
+                                                                </td>
+                                                                <td>
+                                                                    <label><?php echo __('Customer group'); ?></label>
+
+                                                                </td>
+                                                                <td>
+                                                                    <label> <?php echo __('Min qty'); ?></label>
+                                                                </td>
+                                                                <td>
+                                                                    <label> <?php echo __('Max qty'); ?></label>
+                                                                </td>
+                                                                <td>
+                                                                    <label><?php echo __('Tier price type'); ?></label>
+                                                                </td>
+                                                                <td>
+                                                                    <label><?php echo __('Calculate Tier type'); ?></label>
+                                                                </td>
+                                                                <td>
+                                                                    <label> <?php echo __('Price'); ?></label>
+                                                                </td>
+
+                                                                <td>
+
+                                                                </td>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody
+                                                                data-bind="foreach: { data: row.tiers, as: 'tier' } ">
+                                                            <tr class="col-tier">
+                                                                <td>
+                                                                    <select data-bind="options: $root.website(),
+                                                                                   optionsText: 'label',
+                                                                                   optionsValue: 'value',
+                                                                                   value: tier.website_id(),
+                                                                                  attr: { name: 'tier[' + tier.id() + '][website_id]'}
+                                                                ">
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+
+                                                                    <select data-bind="options: $root.customergroup(),
+                                                                                   optionsText: 'label',
+                                                                                   optionsValue: 'value',
+                                                                                   value: tier.customer_group(),
+                                                                                  attr: { name: 'tier[' + tier.id() + '][customer_group]'}
+                                                                ">
+                                                                    </select>
+
+                                                                </td>
+                                                                <td>
+                                                                    <div class="tier-price-min-qty">
+                                                                        <input required
+                                                                               data-bind="attr: { name: 'tier[' + tier.id() + '][min_qty]'},value:tier.min_qty">
+                                                                        <span class="required">*</span>
+                                                                        <input type="hidden"
+                                                                               data-bind="attr: { name: 'tier[' + tier.id() + '][id]'},value:tier.id">
+                                                                        <input type="hidden"
+                                                                               data-bind="attr: { name: 'tier[' + tier.id() + '][is_new]'},value:tier.is_new">
+                                                                        <input type="hidden"
+                                                                               data-bind="attr: { name: 'tier[' + tier.id() + '][row_id]'},value:tier.row_id">
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="tier-price-max-qty">
+                                                                        <input required
+                                                                               data-bind="attr: { name: 'tier[' + tier.id() + '][max_qty]'},value:tier.max_qty">
+                                                                        <span class="required">*</span>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <select data-bind="options:tier_price_type_option(),
+                                                                                value: tier.tier_price_type(),
+                                                                                attr: { name: 'tier[' + tier.id() + '][tier_price_type]'}"
+                                                                    >
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select data-bind="options:calculate_tier_type_option(),
+                                                                                value: tier.calculate_tier_type(),
+                                                                                attr: { name: 'tier[' + tier.id() + '][calculate_tier_type]'}"
+                                                                    >
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="tier-price-amount">
+                                                                        <div class="admin__control-addon">
+                                                                            <input required
+                                                                                   data-bind="attr: { name: 'tier[' + tier.id() + '][price]'},value:tier.price">
+                                                                            <span class="required">*</span>
+                                                                            <!--                                                                        <label class="admin__addon-prefix">-->
+                                                                            <!--                                                                            <span data-bind="text:$root.currencySymbol"> </span>-->
+                                                                            <!--                                                                        </label>-->
+                                                                        </div>
+
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <button
+                                                                        data-bind="event: { click: $root.deleteTier.bind( tier ) }"> <?php echo __('Delete'); ?></button>
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                            <tfoot>
+                                                            <tr>
+                                                                <td colspan="6">
+                                                                    <button
+                                                                        data-bind="event: { click: $root.addTier.bind(row) }"> <?php echo __('Add Tier Price'); ?> </button>
+                                                                </td>
+                                                            </tr>
+                                                            </tfoot>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- ko if: option.multipleRow() ===true -->
+                            <div class="actions">
+                                <button
+                                    data-bind="event: { click: $root.addRow.bind( option,option.id() ) }"> <?php echo __('Add Row'); ?> </button>
+                            </div>
+                            <!--/ko-->
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+
+<script type="text/javascript">
+    require([
+            "jquery",
+            "mage/validation",
+            "ko",
+            'mage/url',
+            'Magenest_AdvancedProductOption/js/productoption'
+        ], function ($, validation, ko, url, productoption) {
+            var loadTemplateUrl = '<?php echo $block->getUrl('advancedproductoption/template/load', ['id' => $templateId]); ?>';
+            var metaDataUrl = '<?php echo $block->getUrl('advancedproductoption/template/websitefeed'); ?>';
+
+            var productoption = new productoption({
+                config: {
+                    loadTemplateUrl: loadTemplateUrl,
+                    metaDataUrl: metaDataUrl,
+                    currencySymbol: '<?php echo $block->getCurrencySymbol() ?>'
+                }
+            });
+            //global variables
+            window.apo_template_id = '<?php echo $templateId ?>';
+            <?php
+            if ($excludeMode == 1)  {
+            ?>
+            window.apo_excludeMode = true;
+            <?php
+            }else {
+            ?>
+            window.apo_excludeMode = false;
+            <?php
+            }
+            ?>
+            var associatedItems = new Array();
+            <?php
+            if (!empty($assignProducts)) {
+            foreach ($assignProducts as $product_id) {
+            ?>
+            associatedItems.push(<?php echo $product_id ?>);
+            <?php
+            }
+            }
+            ?>
+            window.assignProducts = associatedItems;
+            //accrodion
+            $("#product_option_form").validate({
+                rules: {},
+                invalidHandler: function (event, validator) {
+                    // 'this' refers to the form
+                    var errors = validator.numberOfInvalids();
+                    if (errors) {
+                        console.log('there is invalid fields');
+                        var message = errors == 1
+                            ? 'You missed 1 field. It has been highlighted'
+                            : 'You missed ' + errors + ' fields. They have been highlighted';
+                        $("div.error span").html(message);
+                        $("div.error").show();
+                    } else {
+                        $("div.error").hide();
+                        console.log('there is no invalid fields');
+
+                    }
+                }
+            });
+
+        }
+    );
+
+</script>

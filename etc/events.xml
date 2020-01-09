@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magenest. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="checkout_cart_product_add_after">
+        <observer name="advanced_option_observer_product" instance="Magenest\AdvancedProductOption\Observer\Cart\Option" />
+    </event>
+    <event name="catalog_product_get_final_price">
+        <observer name="advanced_option_observer" instance="Magenest\AdvancedProductOption\Observer\Price\Option" />
+    </event>
+    <event name="catalog_product_load_after">
+        <observer name="giftcard_observer_product_option" instance="Magenest\AdvancedProductOption\Observer\Product\Option"/>
+    </event>
+    <event name="catalog_product_save_before">
+        <observer name="mapping_observer_product_option" instance="Magenest\AdvancedProductOption\Observer\Product\Save"/>
+    </event>
+</config>

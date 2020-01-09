@@ -1,0 +1,85 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: thuy
+ * Date: 13/08/2017
+ * Time: 01:29
+ */
+?>
+<div class="loading-mask admin__form-loading-mask" data-role="loader">
+</div>
+<form id="product_option_form" method="post"
+      action="<?php echo $block->getUrl('advancedproductoption/template/post'); ?>" enctype="multipart/form-data">
+    <?php echo $block->getChildHtml('templated.edit'); ?>
+    <div class="fieldset-wrapper admin__collapsible-block-wrapper opened" id="manage-products-wrapper">
+        <div class="fieldset-wrapper-title">
+            <strong class="admin__collapsible-title" data-toggle="collapse" data-target="#manage-products-content">
+                <span><?php /* @escapeNotVerified */
+                    echo __('Associated Products') ?></span>
+            </strong>
+        </div>
+        <div class="fieldset-wrapper-content in collapse" id="manage-products-content">
+            <fieldset class="fieldset">
+                <?php echo $block->getChildHtml('product.listing.main'); ?>
+            </fieldset>
+        </div>
+    </div>
+</form>
+
+<script>
+    require([
+        'jquery'
+    ], function ($) {
+        'use strict';
+        setTimeout(function(){ $('.admin__form-loading-mask').fadeOut() }, 5000);
+
+        $(document).on("click","#back_tempate", function () {
+            var url = '<?php /* @escapeNotVerified */ echo $block->getUrl('advancedproductoption/template/load');?>';
+            var param = {
+                clearSession: true
+            };
+            $.ajax({
+                showLoader: false,
+                url: url,
+                data: param,
+                type: "POST",
+                dataType: 'json'
+            }).done(function (data) {
+            })
+        });
+
+        // Attach the event click for all links in the page
+        $(document).on("click", "a" , function() {
+            var url = '<?php /* @escapeNotVerified */ echo $block->getUrl('advancedproductoption/template/load');?>';
+            var param = {
+                clearSession: true
+            };
+            $.ajax({
+                showLoader: false,
+                url: url,
+                data: param,
+                type: "POST",
+                dataType: 'json'
+            }).done(function (data) {
+            })
+        });
+
+        // Attach the event close tab page
+        $(window).on("beforeunload", function() {
+            var url = '<?php /* @escapeNotVerified */ echo $block->getUrl('advancedproductoption/template/load');?>';
+            var param = {
+                clearSession: true
+            };
+            $.ajax({
+                showLoader: false,
+                url: url,
+                data: param,
+                type: "POST",
+                dataType: 'json'
+            }).done(function (data) {
+            })
+        });
+
+    });
+</script>
+

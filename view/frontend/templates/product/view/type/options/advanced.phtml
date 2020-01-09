@@ -1,0 +1,24 @@
+<?php
+/** @var \Magenest\AdvancedProductOption\Block\Product\View\Option $block */
+$productId = $block->getProductId();
+/*$ranges = $block->getSpecialPriceDays();*/
+//$ranges =[];
+//$specialPrice = $block->getSpecialPrice();
+//$delta = floatval( $block->getDeltaPrice());
+?>
+<style>
+    .tooltip-icon{
+        background-image:url('<?php echo $block->getViewFileUrl('Magenest_AdvancedProductOption/img/tooltip.png') ?>');
+    }
+</style>
+
+<div class="fieldset"  id="advancedoption" data-bind="scope:'advancedoption'">
+    <!-- ko template:getTemplate() --> <!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "#advancedoption": {
+                "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $block->getJsLayout(); ?>
+            }
+        }
+</script>
+</div>

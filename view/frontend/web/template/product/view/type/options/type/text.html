@@ -1,0 +1,29 @@
+<label class="label">
+    <span data-bind="text:title()"> </span>
+    <!--ko if:is_required() ==1 -->
+    <span class="required-field" data-bind="i18n: '(required)'"></span>
+    <!--/ko-->
+    <!--ko if:hasToolTip() -->
+    <span class="tooltip-icon tooltip" >
+        <span class="tooltiptext" data-bind="text:tooltip()"> </span>
+    </span>
+    <!--/ko-->
+    <!--ko if:rows()[0].showSpecialPrice() -->
+    <span class="price-notice">+</span>
+    <span class="special-price" data-bind="text:rows()[0].formatted_special_price()"> </span>
+    <!--/ko-->
+    <!--ko if: rows()[0].showSPrice()  -->
+    <span class="price-notice" data-bind="attr:{'class': rows()[0].originPriceClass() }">+</span>
+    <span class="normal-price" data-bind="text:rows()[0].formatted_price(),attr:{'class': rows()[0].originPriceClass()}"> </span>
+    <!--/ko-->
+</label>
+
+<div class="control">
+    <input type="text"  class="input-text" data-bind="attr: { name: 'aop[' + id() + ']','data-rule-required': option.dataRequired()}" />
+    <!-- ko if:rows()[0].image() -->
+    <div class="option-illustration showTip L1">
+        <img class="apo-img" data-bind="attr: {src: rows()[0].image() }"/>
+
+    </div>
+    <!--/ko-->
+</div>

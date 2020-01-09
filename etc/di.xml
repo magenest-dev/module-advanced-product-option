@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Magenest\AdvancedProductOption\Model\ResourceModel\Template\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magenest_apo_template</argument>
+            <argument name="resourceModel" xsi:type="string">Magenest\AdvancedProductOption\Model\ResourceModel\Template</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="advancedproductoption_template_listing_data_source" xsi:type="string">Magenest\AdvancedProductOption\Model\ResourceModel\Template\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Magento\Sales\Block\Adminhtml\Items\Column\Name" type="Magenest\AdvancedProductOption\Block\Adminhtml\Items\Column\Name" />
+
+    <preference for="Magento\Sales\Block\Order\Item\Renderer\DefaultRenderer" type="Magenest\AdvancedProductOption\Block\Order\Item\Renderer\DefaultRenderer" />
+
+    <type name="Magento\Quote\Model\Quote\Item">
+        <plugin
+                name="Magenest_AdvancedProductOption::Options_product"
+                type="Magenest\AdvancedProductOption\Plugin\Product\Options"
+                sortOrder="1"/>
+    </type>
+
+</config>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="event">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string">Quantity Mapping</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="dataScope" xsi:type="string">data.event</item>
+            </item>
+        </argument>
+        <container name="header-options">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string"/>
+                    <item name="template" xsi:type="string">ui/form/components/complex</item>
+                    <item name="content" xsi:type="string" translate="true">Configure your quantity mapping, the mapping value is in percents</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+            <container name="add-option">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="title" xsi:type="string" translate="true">Add Mapping</item>
+                        <item name="component" xsi:type="string">Magento_Ui/js/form/components/button</item>
+                        <item name="sortOrder" xsi:type="number">20</item>
+                        <item name="actions" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="targetName" xsi:type="string">ns = ${ $.ns }, index = mapping_value</item>
+                                <item name="actionName" xsi:type="string">processingAddChild</item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </container>
+        </container>
+        <dynamicRows name="mapping_value">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="addButtonLabel" xsi:type="string" translate="true">Add Mapping</item>
+                    <item name="component" xsi:type="string">Magento_Catalog/js/components/dynamic-rows-import-custom-options</item>
+                    <item name="template" xsi:type="string">ui/dynamic-rows/templates/collapsible</item>
+                    <item name="additionalClasses" xsi:type="string">admin__field-wide</item>
+                    <item name="deleteProperty" xsi:type="string">is_delete</item>
+                    <item name="deleteValue" xsi:type="number">1</item>
+                    <item name="addButton" xsi:type="boolean">false</item>
+                    <item name="renderDefaultRecord" xsi:type="boolean">false</item>
+                    <item name="columnsHeader" xsi:type="boolean">false</item>
+                    <item name="collapsibleHeader" xsi:type="boolean">true</item>
+                    <item name="dataScope" xsi:type="string">mapping_value</item>
+                    <item name="links" xsi:type="array">
+                        <item name="insertData" xsi:type="string">${ $.provider }:${ $.dataProvider }</item>
+                    </item>
+                </item>
+            </argument>
+            <container name="record">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="headerLabel" xsi:type="string" translate="true">New Mapping</item>
+                        <item name="component" xsi:type="string">Magento_Ui/js/dynamic-rows/record</item>
+                        <item name="dataScope" xsi:type="string">record</item>
+                        <item name="isTemplate" xsi:type="boolean">true</item>
+                        <item name="is_collection" xsi:type="boolean">true</item>
+                    </item>
+                </argument>
+                <fieldset name="options">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="label" xsi:type="string"/>
+                            <item name="opened" xsi:type="boolean">true</item>
+                        </item>
+                    </argument>
+                    <container name="options-container">
+                        <argument name="data" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="component" xsi:type="string">Magento_Ui/js/form/components/group</item>
+                                <item name="breakLine" xsi:type="boolean">false</item>
+                                <item name="showLabel" xsi:type="boolean">false</item>
+                                <item name="additionalClasses" xsi:type="string">admin__field-group-columns admin__control-group-equal</item>
+                                <item name="sortOrder" xsi:type="number">10</item>
+                            </item>
+                        </argument>
+                        <field name="quantity">
+                            <argument name="data" xsi:type="array">
+                                <item name="config" xsi:type="array">
+                                    <item name="label" xsi:type="string" translate="true">Quantity</item>
+                                    <item name="dataScope" xsi:type="string">quantity</item>
+                                    <item name="sortOrder" xsi:type="number">10</item>
+                                    <item name="component" xsi:type="string">Magento_Catalog/component/static-type-input</item>
+                                    <item name="formElement" xsi:type="string">input</item>
+                                    <item name="validation" xsi:type="array">
+                                        <item name="required-entry" xsi:type="boolean">true</item>
+                                        <item name="validate-zero-or-greater-entry" xsi:type="boolean">true</item>
+                                    </item>
+                                </item>
+                            </argument>
+                        </field>
+                        <field name="value">
+                            <argument name="data" xsi:type="array">
+                                <item name="config" xsi:type="array">
+                                    <item name="label" xsi:type="string" translate="true">Value in percents</item>
+                                    <item name="dataScope" xsi:type="string">value</item>
+                                    <item name="sortOrder" xsi:type="number">20</item>
+                                    <item name="component" xsi:type="string">Magento_Catalog/component/static-type-input</item>
+                                    <item name="formElement" xsi:type="string">input</item>
+                                    <item name="validation" xsi:type="array">
+                                        <item name="required-entry" xsi:type="boolean">false</item>
+                                        <item name="validate-zero-or-greater-entry" xsi:type="boolean">true</item>
+                                    </item>
+                                </item>
+                            </argument>
+                        </field>
+                    </container>
+                </fieldset>
+            </container>
+        </dynamicRows>
+    </fieldset>
+</form>

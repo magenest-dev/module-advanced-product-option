@@ -1,0 +1,48 @@
+<!--ko if :isLoading-->
+<span class="spinner" id="apo-spinner" data-role="apo-spinner">
+     </span>
+<!--/ko-->
+<!--ko ifnot :isLoading-->
+
+ <div  class="advanced-product-option">
+        <!-- ko foreach:  { data: ao, as: 'option' } -->
+            <!-- ko if: option.isShown -->
+
+            <div class="field" data-bind="aop:{}" >
+
+                <!-- ko if: type() ==='swatch' -->
+                   <!-- ko template: 'Magenest_AdvancedProductOption/product/view/type/options/type/swatch' --><!-- /ko -->
+                <!--/ko-->
+
+                <!--End of Swatch-->
+
+                <!-- ko if: type() ==='text' -->
+                   <!-- ko template: 'Magenest_AdvancedProductOption/product/view/type/options/type/text' --><!-- /ko -->
+                <!--/ko-->
+                <!-- ko if: type() ==='select' -->
+                    <!-- ko template: 'Magenest_AdvancedProductOption/product/view/type/options/type/select' --><!-- /ko -->
+                <!--/ko-->
+                <!-- ko if: type() ==='textarea' -->
+                    <!-- ko template: 'Magenest_AdvancedProductOption/product/view/type/options/type/textarea' --><!-- /ko -->
+                <!--/ko-->
+                <!-- ko if: type() ==='checkbox' -->
+                    <!-- ko template: 'Magenest_AdvancedProductOption/product/view/type/options/type/checkbox' --><!-- /ko -->
+                <!--/ko-->
+
+                <!-- ko if: type() ==='file' -->
+                    <!-- ko template: 'Magenest_AdvancedProductOption/product/view/type/options/type/file' --><!-- /ko -->
+                <!--/ko-->
+
+                <!--Start of Radio-->
+                <!-- ko if: type() ==='radio' -->
+                     <!-- ko template: 'Magenest_AdvancedProductOption/product/view/type/options/type/radio' --><!-- /ko -->
+                <!--/ko-->
+                <!--End of Radio-->
+
+            </div>
+            <!-- /ko -->
+
+        <!-- /ko -->
+ </div>
+<!--/ko-->
+

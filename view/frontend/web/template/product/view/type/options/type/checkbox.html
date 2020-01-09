@@ -1,0 +1,94 @@
+<label>
+    <span data-bind="text:title()"> </span>
+    <!--ko if:is_required() ==1-->
+    <span class="required-field" data-bind="i18n: '(required)'"></span>
+    <!--/ko-->
+    <!--ko if:hasToolTip() -->
+    <span class="tooltip-icon tooltip" >
+           <span class="tooltiptext" data-bind="text:tooltip()"> </span>
+    </span>
+    <!--/ko-->
+</label>
+<div class="control">
+    <div class="options-list nested">
+        <!-- ko foreach:rows-->
+        <div class="field choice">
+            <input type="checkbox" data-bind="
+                                        attr: { name: 'aop[' + option_id() + ']['+ id()+']',
+                                                value:id(),
+                                                'data-rule-required': option.dataRequired(),
+                                                class:option.classNameRow(),
+                                            },
+                                        checked: checkSelected,
+                                        event:{click:chooseOptionFromRow}"
+            />
+            <label> <span data-bind="text:title()"> </span></label>
+
+            <!--ko if:hasToolTip() -->
+            <span class="tooltip-icon tooltip" data-bind="visible: enableTooltip()">
+               <span class="tooltiptext" data-bind="text:tooltip(),visible: enableTooltip()"> </span>
+            </span>
+            <!--/ko-->
+            <!--ko if:showSpecialPrice() -->
+            <span class="price-notice">+</span>
+            <span class="special-price" data-bind="text:formatted_special_price()"> </span>
+
+            <!--/ko-->
+
+            <!--ko if: showSPrice()  -->
+
+            <span class="price-notice" data-bind="attr:{'class': originPriceClass()}">+</span>
+            <span class="normal-price" data-bind="text:formatted_price(),attr:{'class': originPriceClass()}"> </span>
+
+            <!--/ko-->
+            <!--/ko-->
+
+        </div>
+        <!-- ko if:image() -->
+        <div class="option-illustration tooltip">
+            <img class="apo-img" data-bind="
+                                        attr: {src: image(),
+                                                style: image_size()
+                                         },
+                                        event:{ click:chooseSwatch},
+
+            "/>
+            <!--ko if:isSelected() -->
+            <span data-bind="event:{ click:removeSwatch}" class="remove-icon">
+                    X
+            </span>
+            <!--/ko-->
+        </div>
+        <!--/ko-->
+        <!--show the product swatch-->
+        <div class="product-color-swatches">
+            <div class="swatch-first-row">
+                <!--ko if:productImg()-->
+                <span class="color_swatch_box">
+                    <img data-bind="
+                                attr:{ src:productImg, tittle:title, style:product_image_size},
+                                event:{ click:chooseSwatch}
+                    ">
+                </span>
+                <!--/ko-->
+                <!--ko if:isSelected() -->
+                <span data-bind="event:{ click:removeSwatch}" class="remove-icon">
+                    X
+                </span>
+                <!--/ko-->
+            </div>
+            <!--todo:add the js-->
+            <div class="swatch-second-row">
+                <!--ko if:isSelected() -->
+                <!--ko if:swatch()-->
+                <span class="swatch-illusion">
+                    <img data-bind="attr:{src:swatch,tittle:title,style:swatch_size()}" />
+                </span>
+                <!--/ko-->
+                <!--/ko-->
+            </div>
+            <!--display the illustration image-->
+        </div>
+        <!--/ko-->
+    </div>
+</div>

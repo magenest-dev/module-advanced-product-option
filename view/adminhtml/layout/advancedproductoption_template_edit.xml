@@ -1,0 +1,16 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Magenest_AdvancedProductOption::css/template.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Magenest\AdvancedProductOption\Block\Adminhtml\Template\Form" name="form_wrapper">
+                <block class="Magenest\AdvancedProductOption\Block\Adminhtml\Template\Edit" name="templated.edit">
+                </block>
+                <container name="product.listing.main" htmlTag="div" htmlClass="product-listing-main">
+                      <uiComponent name="apo_product_listing"/>
+                </container>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

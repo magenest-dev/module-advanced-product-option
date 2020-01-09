@@ -1,0 +1,52 @@
+img.apo-img {
+    margin-top: 10px;
+}
+
+.advanced-product-option {
+
+}
+.not-visible {
+    display: none;
+}
+span.required {
+    color:red;
+}
+
+.original-price-with-special-price {
+    text-decoration: line-through;
+    font-size: 1.0rem;
+}
+.tooltip-icon {
+    width: 20px !important;
+    height: 20px !important;
+    background-size: 100%;
+
+}
+.tooltip {
+    position: relative;
+    display: inline-block;
+
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    left: 105%;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+select.advanced-product-option-field{
+    width: 92%;
+    height: auto;
+}

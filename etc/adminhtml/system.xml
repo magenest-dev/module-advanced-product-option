@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--todo:// -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="magenest" translate="label" sortOrder="200">
+            <label>Magenest</label>
+        </tab>
+        <section id="advancedproductoption" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Advanced Product Option</label>
+            <tab>magenest</tab>
+            <resource>Magenest_AdvancedProductOption::config_advanced_product_option</resource>
+            <group id="settings_row" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Settings Option</label>
+                <field id="image_size" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Option image size</label>
+                </field>
+                <field id="swatch_image_size" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Option swatch image size</label>
+                </field>
+                <field id="product_image_size" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Option product image size</label>
+                </field>
+            </group>
+            <group id="settings_special_price" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Settings Special Price</label>
+                <field id="mode_apply_special_price_default" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Is Enabled Default</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="from_date_apply" translate="label" type="date" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>From Date</label>
+                    <frontend_model>Magenest\AdvancedProductOption\Block\Adminhtml\Stores\Config\Date</frontend_model>
+                </field>
+                <field id="to_date_apply" translate="label" type="date" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>To Date</label>
+                    <frontend_model>Magenest\AdvancedProductOption\Block\Adminhtml\Stores\Config\Date</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
+
+
